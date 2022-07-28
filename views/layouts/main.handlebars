@@ -1,0 +1,39 @@
+<html lang='en'>
+
+	<head>
+		<meta charset='UTF-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+		<title>The Tech Blog</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel='stylesheet' href='/css/style.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	</head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav class="navbar navbar-expand-md navbar-light bg-light">
+          <a class="navbar-brand h1" href="/"><i class="fa-solid fa-laptop-code"></i>   The Tech Blog</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/dashboard">Dashboard <span class="sr-only">(current)</span></a>
+              </li>
+            </ul>
+            {{#if loggedIn}}
+            <button href="/logout" class="btn btn-outline-warning my-2 my-sm-0">Logout</button>
+            {{else}}
+            <button href="/login" class="btn btn-outline-success my-2 my-sm-0">Login</button>
+            {{/if}}
+          </div>
+        </nav>
+      </header>
+    </div>
+  </body>
