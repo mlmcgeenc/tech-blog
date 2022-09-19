@@ -12,6 +12,7 @@
   <body>
     <div class="container">
       <header>
+
         <nav class="navbar navbar-expand-md navbar-light bg-light">
           {{!-- <a class="navbar-brand h1" href="/"><i class="fa-solid fa-laptop-code"></i>   The Tech Blog</a> --}}
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +35,7 @@
             {{/if}}
           </div>
         </nav>
+
         <h1 class="display-3" href="/"><i class="fa-solid fa-laptop-code"></i>   The Tech Blog</>
       </header>
       <main>
@@ -43,5 +45,7 @@
         Thanks for visiting!
       </footer>
     </div>
-     <script src="/javascript/logout.js"></script>
+    {{#if loggedIn}}
+      <script src="/javascript/logout.js"></script>
+    {{/if}}
   </body>
