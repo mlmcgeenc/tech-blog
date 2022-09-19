@@ -42,6 +42,7 @@ router.post('/login', (req, res) => {
 			res.status(404).json({ message: 'No account with that username exists' });
 			return;
 		}
+    
 		const validPassword = dbUserData.checkPassword(req.body.password);
 
 		if (!validPassword) {
