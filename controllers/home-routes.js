@@ -1,19 +1,26 @@
 const router = require('express').Router();
 const session = require('express-session');
+const sequelize = require('../config/config')
 const { Post, User, Comment } = require('../models');
 
 router.get('/', (req, res) => {
 	// get all posts and the username of the user that made the post
 	Post.findAll({
 		attributes: ['id', 'title', 'post_content', 'created_at'],
-		include: {
-			model: User,
-			attributes: ['username'],
-		},
+		include: [
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'post_id', 'created_at'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      }
+    ]
 	})
 		.then((dbPostData) => {
 			const posts = dbPostData.map((post) => post.get({ plain: true }));
-			res.render('home', {
+			res.render('homepage', {
             posts,
             loggedIn: req.session.loggedIn
         });
