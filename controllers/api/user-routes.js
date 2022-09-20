@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post } = require('../../models');
+const { User, Post, Comment } = require('../../models');
 
 router.get('/', (req, res) => {
 	User.findAll({
@@ -10,6 +10,40 @@ router.get('/', (req, res) => {
 			console.log(err);
 			res.status(500).json(err);
 		});
+});
+
+router.get('/:id', (req, res) => {
+  User.findOne({
+    attributes: { exclude: ['password'] },
+    where: {
+      id: req.params.id
+    },
+    include: [
+      {
+        model: Post,
+        attributes: ['id', 'title', 'post_content', 'created_at']
+      },
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'created_at'],
+        include: {
+          model: Post,
+          attributes: ['title']
+        }
+      }
+    ]
+  })
+    .then(dbUserData => {
+      if (!dbUserData) {
+        res.status(404).json({ message: 'No user found with this id' });
+        return;
+      }
+      res.json(dbUserData);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.post('/signup', (req, res) => {
@@ -56,7 +90,6 @@ router.post('/login', (req, res) => {
 			req.session.loggedIn = true;
 
 			res.json({ user: dbUserData, message: 'You are now logged in!' });
-			console.log('You are now logged in!');
 		});
 	});
 });
@@ -66,7 +99,6 @@ router.post('/logout', (req, res) => {
 		req.session.destroy(() => {
 			res.status(204).end();
 		});
-		console.log('You have logged out');
 	} else {
 		res.status(404).end();
 	}

@@ -38,7 +38,7 @@ router.get('/', (req, res) => {
 router.get('/login', (req, res) => {
   // if session is logged in redirect to home
 	if (req.session.loggedIn) {
-		res.redirect('/');
+		res.redirect('/dashboard');
 		return;
 	}
   // if session is not logged in take user to the login page
@@ -62,7 +62,7 @@ router.get('/post/:id', (req, res) => {
 		},
 		attributes: [
 			'id',
-			'post_url',
+			'post_content',
 			'title',
 			'created_at',
 		],
@@ -90,14 +90,11 @@ router.get('/post/:id', (req, res) => {
 			// serialize the data
 			const post = dbPostData.get({ plain: true });
 
-			// pass data to template
-      if(session.loggedIn) {
-        res.render('single-post', post);
-      } else {
-        res.redirect('/login');
-				return;
-      }
-		})
+      res.render('single-post', {
+        post,
+        loggedIn: req.session.loggedIn
+      });
+    })
 		.catch((err) => {
 			console.log(err);
 			res.status(500).json(err);
