@@ -12,7 +12,7 @@
 A small tech blog site written with express, sequelize, and handlebars.
 <img width="1094" alt="Screen Shot 2022-09-20 at 9 44 57 AM" src="https://user-images.githubusercontent.com/51179862/191274480-95e4294f-1884-4cab-bd30-d216eaa8ae6a.png">
 
-Visit the live app at https://mlmcgeenc.github.io/tech-blog/
+Visit the live app at https://ancient-thicket-53497.herokuapp.com
 
 ## Installation
 Clone the repository to your computer, navigate to the directory and enter 'npm install' to add necessary files.
