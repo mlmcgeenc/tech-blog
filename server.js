@@ -34,12 +34,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-const routes = require('./controllers');
-
 // turn on routes
 // routes must be after all static calls
-// app.use(routes);
-app.use(require('./controllers/'));
+const routes = require('./controllers');
+app.use(routes);
 
 // turn on connect to db and server
 // force: true resyncs the connections and tables recreated
